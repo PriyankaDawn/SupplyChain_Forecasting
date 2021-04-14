@@ -125,7 +125,7 @@ plt.set_xlabel('ISO_week')
 plt.set_ylabel('Sales')
 fig = plt.get_figure()
 plt.plot()
-fig.savefig(SKUOutDir+'/sale_trend.jpg')
+fig.savefig(SKUOutDir+'/sale_trend.jpg',bbox_inches='tight')
 
 #Missing data - Need to add promo and holiday
 
@@ -140,7 +140,7 @@ for sku, sku_df in merged_data.groupby(['SKU']):
     ax.set_title('Season for {}'.format(sku))
 
 fig = ax.get_figure()
-fig.savefig(SKUOutDir+'/box_plot.jpg')
+fig.savefig(SKUOutDir+'/box_plot.jpg',bbox_inches='tight')
     
 #Outlier treatment
 def outlier_mean3sd(df,column_name, *args, **kwargs):
@@ -247,17 +247,17 @@ for sku,sku_df in df_new.groupby(['SKU']):
     sku_df['Sales Weekly Difference'] = sku_df['Sales'] - sku_df['Sales'].shift(1)
     fig1 = plot_acf(sku_df['Sales Weekly Difference'].dropna())
     fig1.suptitle("Sales Weekly Difference ACF plot for - {}".format(sku))
-    fig1.savefig(SKUOutDir+'/ACF_Weekly')
+    fig1.savefig(SKUOutDir+'/ACF_Weekly',bbox_inches='tight')
     
     sku_df['Sales Monthly Difference'] = sku_df['Sales'] - sku_df['Sales'].shift(4)
     fig2 = plot_acf(sku_df['Sales Monthly Difference'].dropna())
     fig2.suptitle("Sales Monthly Difference ACF plot for - {}".format(sku))
-    fig2.savefig(SKUOutDir+'/ACF_montly')
+    fig2.savefig(SKUOutDir+'/ACF_montly',bbox_inches='tight')
     
     sku_df['Sales Seasonal Difference'] = sku_df['Sales'] - sku_df['Sales'].shift(13)
     fig3 = plot_acf(sku_df['Sales Seasonal Difference'].dropna())
     fig3.suptitle("Sales Seasonal Difference ACF plot for - {}".format(sku))
-    fig3.savefig(SKUOutDir+'/ACF_seasonal')
+    fig3.savefig(SKUOutDir+'/ACF_seasonal',bbox_inches='tight')
 
 #Sample zise
 ss=df_new.shape[0]
@@ -276,12 +276,12 @@ for sku,sku_df in df_new.groupby(['SKU']):
     sku_df['Sales Monthly Difference'] = sku_df['Sales'] - sku_df['Sales'].shift(4)
     fig5 = plot_pacf(sku_df['Sales Monthly Difference'].dropna(),lags=int(ss/2-4))
     fig5.suptitle("Sales Monthly Difference PACF plot for - {}".format(sku))
-    fig5.savefig(SKUOutDir+'/PACF_montly')
+    fig5.savefig(SKUOutDir+'/PACF_montly',bbox_inches='tight')
     
     sku_df['Sales Seasonal Difference'] = sku_df['Sales'] - sku_df['Sales'].shift(13)
     fig6 = plot_pacf(sku_df['Sales Seasonal Difference'].dropna(),lags=int(ss/2-13))
     fig6.suptitle("Sales Seasonal Difference PACF plot for - {}".format(sku))
-    fig6.savefig(SKUOutDir+'/PACF_seasonal')
+    fig6.savefig(SKUOutDir+'/PACF_seasonal',bbox_inches='tight')
 #############################################3
     
 # sku_df=df_new.groupby(['SKU'])['Sales'].sum().reset_index()
@@ -297,7 +297,7 @@ for sku,sku_df in df_new.groupby(['SKU']):
     ax = sku_df[['Sales','EWMA_2_weeks','EWMA_4_weeks','EWMA_8_weeks','EWMA_13_weeks']].plot()
     ax.set_title('EWMA Sales plot for - {}'.format(sku))
     fig = ax.get_figure()
-    fig.savefig(SKUOutDir+'/EWMA_nspans')
+    fig.savefig(SKUOutDir+'/EWMA_nspans',bbox_inches='tight')
 
 
 
